@@ -11,10 +11,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_margin="20dp"
+        android:id="@+id/imageViewID"
         android:layout_width="333dp"
         android:layout_height="225dp"
+        android:layout_margin="20dp"
+        android:onClick="onClickChooseImage"
         android:src="@drawable/select_image"
         app:layout_constraintBottom_toTopOf="@+id/plainTextFoodNameID"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +28,6 @@
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_margin_Top="30dp"
         android:ems="10"
         android:hint="Enter The Food Name..."
         android:inputType="textPersonName"
@@ -41,18 +41,18 @@
         android:id="@+id/plainTextFoodMaterialID"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
-        android:layout_margin_Top="30dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
         android:hint="Enter the Food Materials..."
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/buttonID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="329dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"

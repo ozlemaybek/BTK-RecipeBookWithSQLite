@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ozlem.recipebookwithsqlite">
 
+    <!--application tag'inden önce app içinde resim seçilebilmesi için izini almalıyız:-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
