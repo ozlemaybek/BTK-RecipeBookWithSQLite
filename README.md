@@ -86,8 +86,13 @@
 
 > SQLite'da kaydedeceğimiz verilerin 1 Mb'tan büyük olması bize soun oluşturabilir. Şu anda uygulama hata vermese bile ileride bir problem çıkabilir. Bu yüzden bu uygulamada Bitmap'i küçülttük. 
 
+## Birinci ekran:
 
+![image](https://user-images.githubusercontent.com/109730490/183892029-c85d2b1b-f3b3-45b7-b71f-6cb1771fecd3.png)
 
+## Yemeklerden birine tıklanınca
+
+![image](https://user-images.githubusercontent.com/109730490/183892121-7a485bc2-33a0-4481-9b95-fcb210767f1e.png)
 
 ## Kaynaklar
 
