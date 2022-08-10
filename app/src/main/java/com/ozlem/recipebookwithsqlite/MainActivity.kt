@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Birden fazla item olabilir bu yüzden item'ı if ile kontrol etmeye dikkat etmeliyiz.
         if(item.itemId == R.id.add_food_item){
-            val action = ListFragmentDirections.actionListFragmentToRecipeFragment()
+            val action = ListFragmentDirections.actionListFragmentToRecipeFragment("I came from menu" , 0)
             // .navigate diyerek istediğimiz yere gidebiliyoruz:
             Navigation.findNavController(this , R.id.NavHostFragmentID).navigate(action)
         }

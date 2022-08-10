@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -53,6 +54,63 @@ class RecipeFragment : Fragment() {
         // Görsel seç imageView'u için:
         imageViewID.setOnClickListener {
             onClickChooseImage(it)
+        }
+
+        arguments?.let {
+            // gelen bilgi
+            var incomingInformation = RecipeFragmentArgs.fromBundle(it).info
+            if(incomingInformation.equals("I came from menu")){
+                // Yeni bir yemek eklemeye geldi.
+                // Aşağıdaki 2 bölümü boş bırakalım:
+                plainTextFoodNameID.setText("")
+                plainTextFoodMaterialID.setText("")
+                // butonu görünür olarak ayarlayalım:
+                buttonID.visibility = View.VISIBLE
+                //görsel seçme arkaplanı:
+                val chooseImageBackround = BitmapFactory.decodeResource(context?.resources , R.drawable.select_image)
+                imageViewID.setImageBitmap(chooseImageBackround)
+            }else{
+                // Daha önce oluşturulan yemeği görmeye geldi.
+                // Bu durumda SQLite'dan gelen id'yi çekip göstermem gerekiyor.
+                // butonun görünürlüğünü görünmez yapalım:
+                buttonID.visibility = View.INVISIBLE
+
+                // Bize yollanan id'yi alalım:
+                val choosenId = RecipeFragmentArgs.fromBundle(it).id
+
+                context?.let {
+
+                    try {
+
+                        // Database'i oluşturalım:
+                        val db = it.openOrCreateDatabase("Foods",Context.MODE_PRIVATE,null)
+                        // cursor'ı oluşturalım:
+                        val cursor = db.rawQuery("SELECT * FROM foods WHERE id = ?", arrayOf(choosenId.toString()))
+
+                        // Seçilen yemeğe ait datayı çekelim:
+                        val foodNameIndex = cursor.getColumnIndex("foodName")
+                        val foodMaterialIndex = cursor.getColumnIndex("foodMaterials")
+                        val foodImage = cursor.getColumnIndex("image")
+
+                        // Çektiğimiz dataları ekranda yerlerine atayalım:
+                        while(cursor.moveToNext()){
+                            plainTextFoodNameID.setText(cursor.getString(foodNameIndex))
+                            plainTextFoodMaterialID.setText(cursor.getString(foodMaterialIndex))
+                            // Görsel bizebyte dizisi olarak geliyor sonrasında onu Bitmap'e çeviriyoruz.
+                            val byteArray = cursor.getBlob(foodImage)
+                            // Byte Dizisini bitmap'e çevirelim:
+                            val bitmap = BitmapFactory.decodeByteArray(byteArray,0,byteArray.size)
+                            imageViewID.setImageBitmap(bitmap)
+                        }
+                        // cursor'ı kapatalım:
+                        cursor.close()
+
+                    } catch (e: Exception){
+                        e.printStackTrace()
+                    }
+
+                }
+            }
         }
 
     }
